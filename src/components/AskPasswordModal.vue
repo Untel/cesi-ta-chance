@@ -1,24 +1,29 @@
 <template>
-  <v-dialog v-model="modal.open" persistent max-width="290">
+  <v-dialog v-model="open" persistent max-width="290">
     <v-card>
-      <v-card-title class="headline">Accès sécurisé</v-card-title>
+      <v-card-title class="headline">
+        <v-flex justify-space-around>
+          <v-icon color="warning">warning</v-icon>
+          <span>Accès sécurisé</span>
+        </v-flex>
+      </v-card-title>
       <v-card-text>
-        Veuillez saisir un mot de passe
+        Veuillez saisir un mot de passe pour pouvoir continuer
         <v-text-field
-          label="Mot de passe invité"
-          hint="8 charachtères minimum"
-          v-model="modal.password"
-          min="8"
+          label="Mot de passe administrateur"
+          v-model="password"
+          :error-messages="errors"
+          autofocus
           :append-icon="passwordVisible ? 'visibility' : 'visibility_off'"
           :append-icon-cb="() => (passwordVisible = !passwordVisible)"
           :type="!passwordVisible ? 'password' : 'text'"
-          counter
+          @keyup.enter="validate"
         ></v-text-field>
       </v-card-text>
       <v-card-actions>
         <v-spacer></v-spacer>
         <v-btn flat @click.native="cancel">Annuler</v-btn>
-        <v-btn color="primary" flat @click.native="validate">Connection</v-btn>
+        <v-btn color="primary" @click.native="validate">Connection</v-btn>
       </v-card-actions>
     </v-card>
   </v-dialog>
@@ -28,6 +33,7 @@
 </style>
 
 <script>
+
   export default {
     name: 'ask-password-modal',
     props: [
@@ -35,24 +41,26 @@
     ],
     data() {
       return {
-        modal: {
-          open: true,
-          password: null,
-          next: null,
-          cancel: null,
-        },
+        open: true,
+        password: null,
+        errors: [],
         passwordVisible: false,
       };
     },
     methods: {
       validate() {
-        this.$emit('update:valid', true)
+        this.errors = [];
+        if (!this.password) return this.errors.push('Veuillez saisir un mot de passe.')
+        if (this.$services.shared.adminPassword === this.password) {
+          this.$emit('update:valid', true);
+        } else {
+          this.errors.push('Le mot de passe est invalide')
+        }
       },
       cancel() {
-        window.history.back();
+        this.$router.push('/');
       }
     },
-    computed: {
-    },
+    computed: {},
   };
 </script>

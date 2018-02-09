@@ -129,14 +129,95 @@
         readonly
       ></v-text-field>
     </v-flex>
-    <textarea id="clipboard"></textarea>
-    <v-snackbar
-      :timeout="snack.timeout"
-      :color="snack.color"
-      v-model="snack.open"
+
+    <v-select
+      label="Quelle formation vous intéresse ?"
+      v-bind:items="$services.shared.trainings"
+      v-model="contact.interestedBy"
+      item-text="name"
+      item-value="name"
+      class="cesi-list"
+      :append-icon="contact.interestedBy ? 'content_copy' : ''"
+      :append-icon-cb="() => copy(contact.interestedBy.join(', '))"
+      readonly
+      multiple
+      chips
+      max-height="auto"
+      autocomplete
     >
-      <span v-html="snack.text"></span>
-    </v-snackbar>
+      <template slot="selection" slot-scope="data">
+        <v-chip
+          close
+          @input="data.parent.selectItem(data.item)"
+          :selected="data.selected"
+          class="chip--select-multi"
+          :key="data.item.code"
+        >
+          <v-avatar class="primary">{{ data.item.code }}</v-avatar>
+          {{ data.item.name }}
+        </v-chip>
+      </template>
+      <template slot="item" slot-scope="data">
+        <template v-if="typeof data.item !== 'object'">
+          <v-list-tile-content v-text="data.item"></v-list-tile-content>
+        </template>
+        <template v-else>
+          <v-list-tile-content>
+            <v-list-tile-title v-html="data.item.name"></v-list-tile-title>
+          </v-list-tile-content>
+        </template>
+      </template>
+    </v-select>
+
+    <v-layout row>
+      <v-flex>
+        <v-text-field
+          label="Comment avez vous connu le CESI ?"
+          v-model="contact.knownCesi"
+          multi-line
+          :append-icon="contact.knownCesi ? 'content_copy' : ''"
+          :append-icon-cb="() => copy(contact.knownCesi)"
+          readonly
+        ></v-text-field>
+      </v-flex>
+    </v-layout>
+
+    <v-layout column align-center>
+      <v-checkbox
+        color="primary"
+        label="Êtes-vous en contact avec d'autres écoles ?"
+        v-model="contact.hasContactWithOtherSchools"
+        readonly
+      ></v-checkbox>
+
+      <v-select
+          box
+          v-if="contact.hasContactWithOtherSchools"
+          label="Lesquelles ?"
+          chips
+          tags
+          clearable
+          v-model="contact.schoolsContacts"
+          :append-icon="contact.schoolsContacts ? 'content_copy' : ''"
+          :append-icon-cb="() => copy(contact.schoolsContacts.join(', '))"
+          readonly
+        >
+          <template slot="selection" slot-scope="data">
+            <v-chip close @input="data.parent.selectItem(data.item)">
+              {{ data.item }}
+            </v-chip>
+          </template>
+      </v-select>
+    </v-layout>
+
+    <v-checkbox
+      color="primary"
+      label="J'autorise le CESI à me contacter afin d'obtenir plus d'informations sur mon projet de formation"
+      v-model="contact.allowContact"
+      readonly
+    ></v-checkbox>
+
+    <textarea id="clipboard"></textarea>
   </v-flex>
 </template>
 
@@ -161,9 +242,7 @@
       'contact',
     ],
     data() {
-      return {
-        snack: {},
-      };
+      return {};
     },
     methods: {
       copy(text) {
@@ -173,12 +252,13 @@
           input.select();
           try {
             const status = document.execCommand('copy');
-            if (status) this.$services.notify(`Vous avez copié "${text}"`, 4000);
+            if (status) this.$services.snack.notify(`Vous avez copié "${text}"`, 4000);
           } catch (e) {
-            this.$services.error('Echec de la copie.', 4000);
+            console.log('ERR COPY', e)
+            this.$services.snack.error('Echec de la copie.', 4000);
           }
         } else {
-          this.$services.info('Il n\'y a rien à copier', 4000);
+          this.$services.snack.info('Il n\'y a rien à copier', 4000);
         }
       },
     },

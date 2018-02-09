@@ -75,7 +75,7 @@
       </v-data-table>
     </v-flex>
   </v-layout>
-    <ask-password-modal v-else :valid.sync="canNavigate"></ask-password-modal>
+  <ask-password-modal v-else :valid.sync="canNavigate"></ask-password-modal>
 </template>
 
 <style>
@@ -125,18 +125,15 @@
 
       if (this.isOnline) {
         this.$api.get('candidate')
-          .then(res => {
-            console.log('res', res);
+          .then(({data}) => {
             this.items = [
               ...this.items, 
-              ...res.data.map(fromBackToFront)
+              ...data.map(fromBackToFront)
             ];
-
-            console.log('items', this.items);
           })
           .catch((err) => {
-            console.log('[ERR]', err)
-            this.$services.snack.error('Une erreure est survenue')
+            console.warn('ERR', err);
+            this.$services.snack.error('Une erreure est survenue');
           });
       }
     },

@@ -1,4 +1,5 @@
 const fromFrontToBack = (el) => {
+  console.log(el.schoolsContacts);
   return {
     candidateId: el._id,
     candidateLastName: el.lastName,
@@ -19,7 +20,7 @@ const fromFrontToBack = (el) => {
     allowContact: el.allowContact,
     // contactDate: new Date(el.contactDate),
     contactPlace: el.contactPlace,
-    schoolsContacts: el.schoolsContacts && el.schoolsContacts.length ? el.schoolsContacts.map(el = ({ schoolName: el })) : [],
+    schoolsContacts: el.schoolsContacts && el.schoolsContacts.length ? el.schoolsContacts.map(el => ({ schoolName: el })) : [],
   };
 
 };
@@ -31,21 +32,21 @@ const fromBackToFront = (el) => {
     firstName: el.candidateFirstName,
     gender: el.candidateGender,
     birthdate: el.candidateBirthdate ? new Date(el.candidateBirthdate).toISOString() : null,
-    candidateAddress: el.address,
-    candidateCity: el.city,
-    candidatePostalCode: el.postalCode,
-    candidatePhone: el.phone,
-    candidateEmail: el.email,
-    candidateFormation: el.training,
+    address: el.candidateAddress,
+    city: el.candidateCity,
+    postalCode: el.candidatePostalCode,
+    phone: el.candidatePhone,
+    email: el.candidateEmail,
+    training: el.candidateFormation,
     degree: el.candidateDegree,
-    candidateLastSchool: el.lastSchool,
-    candidateKnownCesi: el.knownCesi,
+    lastSchool: el.candidateLastSchool,
+    knownCesi: el.candidateKnownCesi,
     hasContactWithOthersSchools: el.hasContactWithOthersSchools,
     allowContact: el.allowContact,
-    interestedBy: el.interests ? el.interests.split(',') : '',
+    interestedBy: el.interests ? el.interests.split(', ') : [],
     // contactDate: el.contactDate ? new Date(el.contactDate).toISOString() : null,
     contactPlace: el.contactPlace,
-    schoolsContacts: el.schoolsContacts && el.schoolsContacts.length ? el.schoolsContacts.map(el = el.schoolName) : [],
+    schoolsContacts: el.schoolsContacts && el.schoolsContacts.length ? el.schoolsContacts.map(el => el.schoolName) : [],
     sync: true,
   };
 };

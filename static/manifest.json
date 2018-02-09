@@ -1,9 +1,9 @@
 {
-  "name": "cesi-ta-chance",
-  "short_name": " cesi-ta-chance",
+  "name": "Cesi Ta Chance",
+  "short_name": "Cesi Ta Chance",
   "icons": [
     {
-      "src": "/android-chrome-192x192.png",
+      "src": "/static/android-chrome-192x192.png",
       "sizes": "192x192",
       "type": "image/png"
     }

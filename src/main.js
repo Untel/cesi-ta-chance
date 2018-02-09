@@ -94,6 +94,7 @@ Vue.db = Vue.prototype.$db = new Nedb({
 
 Vue.api = Vue.prototype.$api = axios.create({ 
   baseURL: 'http://localhost:1664/',
+  // transformResponse: [(res) => JSON.parse(res.data)] 
   headers: {
     'Access-Control-Allow-Origin': '*',
     'Access-Control-Allow-Methods': 'GET, POST, PATCH, PUT, DELETE, OPTIONS',
@@ -104,10 +105,10 @@ Vue.api = Vue.prototype.$api = axios.create({
 
 Vue.services = Vue.prototype.$services = initServices(Vue);
 
-router.beforeEach((to, from, next) => {
-  console.log('to', to, 'from', from);
-  next();
-})
+// router.beforeEach((to, from, next) => {
+//   console.log('to', to, 'from', from);
+//   next();
+// })
 
 /* eslint-disable no-new */
 new Vue({

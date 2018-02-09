@@ -32,7 +32,12 @@
       <!-- Top toolbar -->
       <v-toolbar fixed app :clipped-left="clipped" >
 
-        <v-toolbar-side-icon @click.native.stop="drawer = !drawer"></v-toolbar-side-icon>
+        <!-- <v-toolbar-side-icon></v-toolbar-side-icon> -->
+        <v-btn icon @click.native.stop="drawer = !drawer">
+          <v-avatar size="36px">
+            <img src="./assets/cesi.png" alt="">
+          </v-avatar>
+        </v-btn>
 
         <!-- <v-btn 
           icon
@@ -82,7 +87,11 @@
       <!-- FOOTER -->
       <v-footer :fixed="fixed" app>
         <v-spacer></v-spacer>
-        <span>&copy; 2017</span>
+        <span>
+          Made with 
+          <span style="color: red">&#10084;</span>
+          by <a href="https://www.linkedin.com/in/adrienfernandes/" target="_blank">Adrien Fernandes</a> <small>(Code & Design)</small>, <a href="https://www.linkedin.com/in/yann-le-moal-595510152/" target="_blank">Yann Le Moal</a> <small>(API)</small> and <a href="https://www.linkedin.com/in/marco-martins-ab216091" target="_blank">Marco Martins</a> <small>(Something else ..)</small>
+        </span>
       </v-footer>
 
       <v-snackbar
@@ -93,7 +102,9 @@
         v-model="snack.open"
       >
         <span v-html="snack.text"></span>
-        <v-btn dark flat @click.native="snack.open = false">Close</v-btn>
+        <v-btn dark flat @click.native="snack.open = false" icon>
+          <v-icon>close</v-icon>
+        </v-btn>
       </v-snackbar>
 
     </v-app>
@@ -117,20 +128,10 @@
       right: true,
       title: 'CESI Ta Chance !',
       snack: {},
-      modal: {
-        opened: false,
-        next: null,
-        cancel: null,
-        password: {
-          value: null,
-          isVisible: false,
-        }
-      },
     }),
 
     created() {
      this.snack = this.$services.snack.data;
-     this.modal = this.$services.modal.data;
     }
   };
 </script>
