@@ -252,7 +252,9 @@
           input.select();
           try {
             const status = document.execCommand('copy');
-            if (status) this.$services.snack.notify(`Vous avez copié "${text}"`, 4000);
+            if (status) {
+              this.$services.snack.primary(`Vous avez copié "${text}"`);
+            }
           } catch (e) {
             console.log('ERR COPY', e)
             this.$services.snack.error('Echec de la copie.', 4000);

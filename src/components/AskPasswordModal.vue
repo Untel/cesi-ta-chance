@@ -34,6 +34,8 @@
 
 <script>
 
+  import { SHA256 } from 'crypto-js';
+
   export default {
     name: 'ask-password-modal',
     props: [
@@ -49,13 +51,29 @@
     },
     methods: {
       validate() {
+        
+        // Nous savons que ce n'est pas propre de vérifier un mot de passe en front
+        // En soit, c'est notre seul moyen de pouvoir permettre une navigation OffLine
+        // Tout en sécurisant certaines parties de l'application via MDP.
+        // De plus, la modal en soit laisse quand même appeler des Data() les composants,
+
         this.errors = [];
-        if (!this.password) return this.errors.push('Veuillez saisir un mot de passe.')
-        if (this.$services.shared.adminPassword === this.password) {
-          this.$emit('update:valid', true);
-        } else {
-          this.errors.push('Le mot de passe est invalide')
+        if (!this.password) return this.errors.push('Veuillez saisir un mot de passe.');
+
+        const compare = (pwd) => {
+          if (pwd === this.password) {
+            this.$emit('update:valid', true);
+          } else {
+            this.errors.push('Le mot de passe est invalide')
+          }
         }
+
+        if (!this.isOnline || true) {
+          this.$utils.findOne({ key: 'adminPassword' }, (err, kvp) => {
+            compare(kvp.value);
+          });
+        }
+
       },
       cancel() {
         this.$router.push('/');

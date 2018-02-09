@@ -92,6 +92,19 @@ Vue.db = Vue.prototype.$db = new Nedb({
   autoload: true 
 });
 
+Vue.utils = Vue.prototype.$utils = new Nedb({ 
+  filename: 'cesi-ta-chance-utils', 
+  autoload: true 
+});
+
+
+Vue.utils.find({ key: 'adminPassword' }, (err, val) => {
+  if (err || !val.length) {
+    console.log('No password found, setting the default one.')
+    Vue.utils.insert({ key: 'adminPassword', value: 'cesi' });
+  }
+});
+
 Vue.api = Vue.prototype.$api = axios.create({ 
   baseURL: 'http://localhost:1664/',
   // transformResponse: [(res) => JSON.parse(res.data)] 

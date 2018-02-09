@@ -7,30 +7,28 @@ export default class SnackService {
     open: false,
   }
 
-  notify(text, color, timeout) {
-    this.data.text = text;
-    this.data.color = color;
-    this.data.timeout = timeout;
+  notify(data) {
+    Object.keys(data).forEach(k => this.data[k] = data[k]);
     this.data.open = true;
   }
 
   primary(text) {
-    this.notify(text, 'primary');
+    this.notify({text, color: 'primary'});
   }
 
   success(text) {
-    this.notify(text, 'success');
+    this.notify({text, color: 'success'});
   }
 
   warn(text) {
-    this.notify(text, 'warning');
+    this.notify({text, color: 'warning'});
   }
 
   error(text) {
-    this.notify(text, 'error');
+    this.notify({text, color: 'error'});
   }
 
   info(text) {
-    this.notify(text, 'info');
+    this.notify({text, color: 'info'});
   }
 }
