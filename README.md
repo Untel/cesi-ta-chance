@@ -9,6 +9,7 @@ Preview: https://untel.github.io/cesi-ta-chance/
 Le mot de passe pour accéder au panel de settings est ``cesi``
 
 ![cesi-ta-chance](https://raw.githubusercontent.com/untel/cesi-ta-chance/master/demo.png)
+![cesi-ta-chance2](https://raw.githubusercontent.com/untel/cesi-ta-chance/master/demo2.png)
 
 
 ## Build Setup
