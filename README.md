@@ -1,6 +1,15 @@
 # cesi-ta-chance
 
-> A Vue.js project
+Progressive Web Application faite pour l'école CESI Brest, afin que les coordinateurs puisse saisir les coordonnées de potentiels candidats lors de salon. Et ce, même si la connection est mauvaise, en permettant une sauvegarde locale pour un synchronisation future avec le serveur.
+
+Preview: https://untel.github.io/cesi-ta-chance/
+``` text
+  Disclaimer: Il ne s'agit ici que du front-end, la synchronisation au serveur ne sera pas possible
+```
+Le mot de passe pour accéder au panel de settings est ``cesi``
+
+![cesi-ta-chance](https://raw.githubusercontent.com/untel/cesi-ta-chance/master/pics/demo.png)
+
 
 ## Build Setup
 
@@ -17,5 +26,3 @@ npm run build
 # build for production and view the bundle analyzer report
 npm run build --report
 ```
-
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
