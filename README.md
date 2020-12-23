@@ -1,6 +1,6 @@
 # cesi-ta-chance
 
-Progressive Web Application faite pour l'école CESI Brest, afin que les coordinateurs puissent saisir les coordonnées des candidats lors d'un salon de l'orientation comme Azimut. Et ce, même si la connection internet est mauvaise ou inexistante, en permettant une sauvegarde locale pour un synchronisation futur avec le serveur.
+Progressive Web Application faite pour l'école CESI Brest, afin que les coordinateurs puissent saisir les coordonnées des candidats lors d'un salon de l'orientation comme Azimut. Et ce, même si la connexion internet est mauvaise ou inexistante, en permettant une sauvegarde locale pour une synchronisation futur avec le serveur.
 
 Preview: https://untel.github.io/cesi-ta-chance/
 ``` text
