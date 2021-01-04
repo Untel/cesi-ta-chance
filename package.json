@@ -11,7 +11,7 @@
     "prod": "npm run build && cd ./dist && http-serve"
   },
   "dependencies": {
-    "axios": "^0.17.1",
+    "axios": "^0.21.1",
     "crypto-js": "^3.1.9-1",
     "nanoid": "^1.0.1",
     "nedb": "^1.8.0",
