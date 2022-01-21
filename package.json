@@ -13,7 +13,7 @@
   "dependencies": {
     "axios": "^0.17.1",
     "crypto-js": "^3.1.9-1",
-    "nanoid": "^1.0.1",
+    "nanoid": "^3.1.31",
     "nedb": "^1.8.0",
     "node-sass": "^4.7.2",
     "vue": "^2.5.2",
